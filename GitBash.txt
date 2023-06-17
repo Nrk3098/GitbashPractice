@@ -1,0 +1,94 @@
+Q.1
+cat/etc/passwd
+cat/etc/passwd | awk -F: '{print $1}'
+cat passwd.txt | awk -F '{if($3>1000)print $3}'
+cat passwd.txt | awk -F: '{print $6}'
+
+------------------------------------------------------------------------------
+Q.2 
+mkdir temp
+cd temp
+touch abc.txt def.txt ghi.txt jkl.txt
+ls
+echo abc.txt | awk -F. '{print $1}'
+mkdir abc
+mv abc.txt abc
+echo def.txt | awk -F. '{print $1}'
+mkdir def
+mv def.txt def
+echo ghi.txt | awk -F. '{print $1}'
+mkdir ghi
+mv ghi.txt ghi
+echo jkl.txt | awk -F. '{print $1}'
+mkdir jkl
+mv jkl.txt jkl
+
+----------------------------------------------------------------------------------------
+Q.3
+mkdir access
+cd access
+touch abc.log.1 def.log.1 ghi.log.1 jkl.log.1 mno.log.1
+echo abc.log.1 | awk -F. '{print $1}'
+touch abc-6152023.log.1
+mkdir abc
+mv abc abc-6152023.log.1
+touch def-6152023.log.1
+mkdir def
+mv def def-6152023.log.1
+touch ghi-6152023.log.1
+mkdir ghi
+mv ghi ghi-6152023.log.1
+touch jkl-6152023.log.1
+mkdir jkl
+mv jkl jkl-6152023.log.1
+touch mno-6152023.log.1
+mkdir mno
+mv mno mno-6152023.log.1
+
+-------------------------------------------------------------------------------
+Q.4
+mkdir /var/log
+cd /var/log
+touch abc.txt dfg.txt
+cp abc.txt /var/log/backup/
+echo moving abc.txt to backup folder
+./ArchiveFilesModified7daysAgo.sh
+
+-------------------------------------------------------------------------------
+Q.5
+mkdir /var/log
+cd /var/log
+touch abc.txt dfg.txt
+egrep -o 'https?://[^\)"]+' access.log | sort | uniq -c | sort -nr |head -4
+---------------------------------------------------------------------------------
+Q.6
+timestamp="21/sep/2019:06:31:06"
+cat access.log | grep "$timestamp"| egrep -o 'https?://[^\)"]+' | sort | uniq -c | sort -nr
+
+----------------------------------------------------------------------------------------------
+Q.7
+timestamp="21/sep/2019:06:31:06"
+cat access.log | grep "$timestamp"|awk -F\" '{print $1}' |sort | uniq -c|sort -nr
+
+---------------------------------------------------------------------------------------------------------
+Q.8
+timestamp="21/sep/2019:06:31:06"
+cat access.log | grep "$timestamp"|awk -F\" '{print $1}' |awk '{print $1}'|sort | uniq -c|sort -nr
+
+-------------------------------------------------------------------------------------------------------------
+Q.9
+DIR ="/etc/httpd/"
+if[-d "$DIR"];then
+echo "Installing config files in $DIR"
+fi
+-----------------------------------------------------------------------------------------------------------------
+Q.10
+mkdir name
+cd name
+touch employee.csv
+nano employee.csv
+cat employee.csv
+awk '$3>10000 {print $2 "," $7}' employee.csv
+
+---------------------------------------------------------------------------------------------
+
